@@ -1,6 +1,4 @@
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +17,8 @@ public class MainServlet extends HttpServlet {
 
     @Override
      public void init(){
-         base = new HashMap<Integer, Set<String>>();
-         single = new Singleton();
+         base = new HashMap<>();
+         single = Singleton.getInstance();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

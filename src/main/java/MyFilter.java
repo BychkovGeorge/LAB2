@@ -1,7 +1,5 @@
 import javax.servlet.*;
 
-import javax.servlet.annotation.WebFilter;
-
 import javax.servlet.http.Cookie;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,7 @@ public class MyFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        singleton = Singleton.GetInstance();
+        singleton = Singleton.getInstance();
     }
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {

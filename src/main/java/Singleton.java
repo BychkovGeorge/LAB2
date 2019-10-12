@@ -1,16 +1,16 @@
 import java.util.HashSet;
-import java.util.Queue;
 import java.util.Set;
 
 public class Singleton {
-    private static Singleton instance;
-    public static Set<String> setId;
 
-    Singleton() {
-        setId = new HashSet<>();
+    private static Singleton instance;
+    private static Set<String> sessionIds;
+
+    private Singleton() {
+        sessionIds = new HashSet<>();
     }
 
-    public static Singleton GetInstance() {
+    public static Singleton getInstance() {
         if (instance == null){
             instance = new Singleton();
         }
@@ -18,14 +18,11 @@ public class Singleton {
     }
 
     public static void addId(String id) {
-        setId.add(id);
+        sessionIds.add(id);
     }
 
     public static boolean containsSessionId(String name){
-        if (setId.contains(name))
-            return true;
-        else
-            return false;
+        return sessionIds.contains(name);
     }
 
 }
