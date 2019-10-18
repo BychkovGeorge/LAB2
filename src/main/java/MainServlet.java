@@ -1,3 +1,6 @@
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -6,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class MainServlet extends HttpServlet {
 
@@ -22,6 +26,41 @@ public class MainServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        Session session = HibernateSessionFactory.getSession();
+
+        Transaction transaction = session.getTransaction();
+        transaction.begin();
+
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+        session.save(new User("123", "1234"));
+
+        transaction.commit();
+        session.close();
+
+
+
+        session = HibernateSessionFactory.getSession();
+        List<User> users = session.createQuery("from User u", User.class).getResultList();
+        session.close();
+
+
+        StringBuilder sb = new StringBuilder();
+        for (User u : users) {
+            sb.append(u.toString() + "<br>");
+        }
+
+        String s = users.stream().map(User::toString).collect(Collectors.joining("<br>"));
+
+        Singleton.getInstance();
+
         Random random = new Random();
         int a = random.nextInt(472) - 125;
         int b = random.nextInt(472) - 125;

@@ -25,4 +25,8 @@ public class Singleton {
         return sessionIds.contains(name);
     }
 
+    public void a() {
+        System.out.println("ok");
+    }
+
 }
